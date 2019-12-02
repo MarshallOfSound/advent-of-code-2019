@@ -5,5 +5,9 @@ declare namespace NodeJS {
 }
 
 declare interface String {
-    lines(): string[];
+  lines(): string[];
+}
+
+declare interface Array {
+  toInts(): number[];
 }

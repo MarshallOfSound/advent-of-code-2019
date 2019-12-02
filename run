@@ -15,4 +15,8 @@ String.prototype.lines = function() {
   return this.split('\n');
 };
 
+Array.prototype.toInts = function() {
+  return this.map(i => parseInt(i));
+};
+
 require(path.resolve(__dirname, process.argv[2]));
