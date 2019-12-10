@@ -60,6 +60,17 @@ for (let tX = 0; tX < grid[0].length; tX++) {
   }
 }
 
+function distance(p1, p2) {
+  return Math.sqrt(Math.pow(p1[0] - p2[0], 2) + Math.pow(p1[1] - p2[1], 2));
+}
+
+for (const key of Object.keys(posGradients)) {
+  posGradients[key].sort((a, b) => distance([x, y], a) - distance([x, y], b));
+}
+for (const key of Object.keys(negGradients)) {
+  negGradients[key].sort((a, b) => distance([x, y], a) - distance([x, y], b));
+}
+
 function orderKeysByGIncZero(keys) {
   const k = [...keys];
   const pos = k.filter(a => a >= 0).sort((a, b) => a - b);
