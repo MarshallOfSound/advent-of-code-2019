@@ -3,9 +3,17 @@
 const fs = require('fs');
 const path = require('path');
 
+let fileArg = process.argv[2];
+if (fileArg.endsWith('.')) {
+  fileArg = fileArg.substr(0, fileArg.length - 1);
+}
+if (!fileArg.endsWith('.js')) {
+  fileArg += '.js';
+}
+
 global.loadInput = () => {
-  const primaryInput = path.resolve(__dirname, process.argv[2].replace('.js', '.in'));
-  const secondaryInput = path.resolve(__dirname, path.dirname(process.argv[2]), 'first.in');
+  const primaryInput = path.resolve(__dirname, fileArg.replace('.js', '.in'));
+  const secondaryInput = path.resolve(__dirname, path.dirname(fileArg), 'first.in');
   if (fs.existsSync(primaryInput)) return fs.readFileSync(primaryInput, 'utf8');
   if (fs.existsSync(secondaryInput)) return fs.readFileSync(secondaryInput, 'utf8');
   throw new Error('Failed to find input file for current run');
@@ -19,4 +27,4 @@ Array.prototype.toInts = function() {
   return this.map(i => parseInt(i));
 };
 
-require(path.resolve(__dirname, process.argv[2]));
+require(path.resolve(__dirname, fileArg));
